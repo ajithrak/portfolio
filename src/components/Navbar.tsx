@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -8,13 +9,32 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const navLinks = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
 
   const handleScroll = (id: string) => {
     setIsOpen(false);
-    const element = document.getElementById(id.toLowerCase());
+    const targetId = id.toLowerCase();
+
+    if (location.pathname !== '/') {
+      // Navigate home first, then scroll once the section mounts
+      navigate('/', { state: { scrollTo: targetId } });
+      return;
+    }
+
+    const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const goHome = () => {
+    setIsOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -22,7 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0 cursor-pointer font-bold text-xl tracking-tight text-gray-900 dark:text-white" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div className="flex-shrink-0 cursor-pointer font-bold text-xl tracking-tight text-gray-900 dark:text-white" onClick={goHome}>
             AK<span className="text-indigo-600 dark:text-indigo-400">.</span>
           </div>
           
