@@ -6,6 +6,8 @@ import { Footer } from './components/Footer';
 import HomePage from './pages/HomePage';
 import FintechPage from './pages/FintechPage';
 import HealthcarePage from './pages/HealthcarePage';
+import DemoFintechPage from './pages/DemoFintechPage';
+import DemoHealthcarePage from './pages/DemoHealthcarePage';
 
 const App: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -26,6 +28,8 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/fintech" element={<FintechPage />} />
               <Route path="/healthcare" element={<HealthcarePage />} />
+              <Route path="/demo/fintech" element={<DemoFintechPage />} />
+              <Route path="/demo/healthcare" element={<DemoHealthcarePage />} />
             </Routes>
           </div>
         </main>

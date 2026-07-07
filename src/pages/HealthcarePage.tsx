@@ -7,6 +7,7 @@ const HealthcarePage: React.FC = () => {
     <CaseStudyLayout
       data={HEALTHCARE_DATA}
       badgeClassName="bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400"
+      demoHref="/demo/healthcare"
     />
   );
 };

@@ -7,9 +7,11 @@ interface CaseStudyLayoutProps {
   data: CaseStudyData;
   /** Full Tailwind class string for the accent badge, e.g. "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400" */
   badgeClassName: string;
+  /** Route to a ready-to-use demo template for this domain, e.g. "/demo/fintech" */
+  demoHref?: string;
 }
 
-export const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({ data, badgeClassName }) => {
+export const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({ data, badgeClassName, demoHref }) => {
   return (
     <section className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -36,6 +38,15 @@ export const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({ data, badgeCla
         <p className="text-lg text-gray-600 dark:text-zinc-400 mb-6 leading-relaxed">
           {data.summary}
         </p>
+
+        {demoHref && (
+          <Link
+            to={demoHref}
+            className="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-colors mb-10"
+          >
+            View ready-to-use demo template →
+          </Link>
+        )}
 
         <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-500 dark:text-zinc-400 mb-10 border-b border-gray-100 dark:border-zinc-800 pb-6">
           <span><strong className="text-gray-700 dark:text-zinc-300">{data.role}</strong></span>
